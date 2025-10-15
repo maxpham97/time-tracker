@@ -4,4 +4,5 @@ export const apiRoutes = {
     logout: "/auth/logout",
     createUser: "/auth/register",
     getUser: "/user/profile",
+    clients: "/clients",
 } as const;

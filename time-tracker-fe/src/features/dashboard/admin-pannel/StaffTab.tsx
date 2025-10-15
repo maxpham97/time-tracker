@@ -4,7 +4,7 @@ import { useEditEmployee, useGetEmployees } from "../../../api/employee/employee
 import { ClassicButton } from "../../../components/buttons/ClassicButton";
 import { ClassicTable } from "../../../components/tables/ClassicTable";
 import type { IEmPloyee } from "../../../models/employee/Employee";
-import CreateEditEmployeeForm from "../../login-form/CreateEditEmployeeForm";
+import CreateEditEmployeeForm from "../../forms/CreateEditEmployeeForm";
 
 const StaffTab = () => {
     //STATE
