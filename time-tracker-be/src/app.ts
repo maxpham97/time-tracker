@@ -1,6 +1,8 @@
 import cors from "cors";
 import express from "express";
+import authRoutes from "./routes/authRoutes";
 import employeeRoutes from "./routes/employeeRoutes";
+import userRoutes from "./routes/userRoutes";
 
 const app = express();
 
@@ -14,6 +16,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", employeeRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error("Global error:", err);
