@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import authRoutes from "./routes/authRoutes";
+import clientRoutes from "./routes/clientRoutes";
 import employeeRoutes from "./routes/employeeRoutes";
 import userRoutes from "./routes/userRoutes";
 
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", employeeRoutes);
+app.use("/api", clientRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 
