@@ -3,6 +3,7 @@ import express from "express";
 import authRoutes from "./routes/authRoutes";
 import clientRoutes from "./routes/clientRoutes";
 import employeeRoutes from "./routes/employeeRoutes";
+import locationRoutes from "./routes/locationsRoutes";
 import userRoutes from "./routes/userRoutes";
 
 const app = express();
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 
 app.use("/api", employeeRoutes);
 app.use("/api", clientRoutes);
+app.use("/api", locationRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 
