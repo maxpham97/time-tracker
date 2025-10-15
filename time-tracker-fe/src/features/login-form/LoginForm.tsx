@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { ClassicButton } from "../../components/buttons/classicButton";
+import { ClassicButton } from "../../components/buttons/ClassicButton";
 import { ClassicInput } from "../../components/inputs/classicInput";
 
 interface LoginFormValues {
