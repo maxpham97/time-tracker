@@ -1,10 +1,15 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { BarChart3, Clock, LogOut, Shield } from "lucide-react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLogout } from "../../api/auth/authQueries";
+import { useGetUser } from "../../api/user/userQueries";
 import { ROUTERS_PATHS } from "../../constants/router-paths";
 import AdminPannel from "../../features/dashboard/admin-pannel/AdminPannel";
 import PunchClock from "../../features/dashboard/punch-clock/PunchClock";
 import Reports from "../../features/dashboard/reports/Reports";
+import type { UserResponseDto } from "../../models/user/UserResponseDto";
+import { useGetUserData, useSetUserData } from "../../redux/user/userSlice";
 
 const tabs = [
     { value: "punch", label: "Punch Clock", icon: Clock, Component: PunchClock },
@@ -13,12 +18,26 @@ const tabs = [
 ];
 
 export default function DashboardPage() {
+    const { mutateAsync: logout } = useLogout();
+    const { data: userData } = useGetUser();
+    const { setUserData } = useSetUserData();
+    const user = useGetUserData();
+
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("auth");
-        navigate(ROUTERS_PATHS.LOGIN);
+    const handleLogout = async () => {
+        try {
+            await logout();
+            localStorage.removeItem("token");
+            navigate(ROUTERS_PATHS.LOGIN);
+        } catch (er) {
+            console.log(er);
+        }
     };
+
+    useEffect(() => {
+        setUserData(userData?.user as UserResponseDto);
+    }, [userData, setUserData]);
 
     return (
         <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-800">
@@ -57,7 +76,9 @@ export default function DashboardPage() {
                     {/* Main content */}
                     <div className="flex-1 flex flex-col bg-gray-50">
                         <header className="flex justify-between items-center px-10 py-6 border-b border-gray-200 bg-white shadow-sm">
-                            <h2 className="text-xl font-semibold text-gray-800">Welcome back 👋</h2>
+                            <h2 className="text-xl font-semibold text-gray-800">
+                                Welcome back, {(user as unknown as UserResponseDto)?.name || "User"} 👋
+                            </h2>
                         </header>
 
                         <div className="flex-1 p-8 overflow-auto">

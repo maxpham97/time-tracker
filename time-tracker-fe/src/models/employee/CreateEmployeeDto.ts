@@ -1,7 +1,3 @@
-/**
- * DTO which is used to create employee.
- * @see Operator
- */
 export interface CreateEmployeeDto {
     name: string;
     email: string;

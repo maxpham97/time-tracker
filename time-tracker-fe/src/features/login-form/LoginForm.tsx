@@ -1,26 +1,28 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../../api/auth/authQueries";
 import { ClassicButton } from "../../components/buttons/ClassicButton";
 import { ClassicInput } from "../../components/inputs/classicInput";
-
-interface LoginFormValues {
-    email: string;
-    password: string;
-}
+import type { LoginDto } from "../../models/auth/AuthDto";
 
 export const LoginForm = () => {
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
-    } = useForm<LoginFormValues>();
+    } = useForm<LoginDto>();
+    const { mutateAsync: login } = useLogin();
 
     const navigate = useNavigate();
 
-    const onSubmit = async (data: LoginFormValues) => {
-        console.log("Login:", data);
-        await new Promise((res) => setTimeout(res, 800)); // mock delay
-        navigate("/dashboard");
+    const onSubmit = async (data: LoginDto) => {
+        try {
+            const res = await login(data);
+            localStorage.setItem("token", res.token);
+            navigate("/dashboard");
+        } catch (er) {
+            console.log(er);
+        }
     };
 
     return (
@@ -31,8 +33,8 @@ export const LoginForm = () => {
             <ClassicInput
                 label="Username or email"
                 placeholder="you@example.com"
-                error={errors.email?.message}
-                {...register("email", {
+                error={errors.userName?.message}
+                {...register("userName", {
                     required: "Email is required",
                     pattern: {
                         value: /^\S+@\S+$/i,
