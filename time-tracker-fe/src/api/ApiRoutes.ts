@@ -5,4 +5,5 @@ export const apiRoutes = {
     createUser: "/auth/register",
     getUser: "/user/profile",
     clients: "/clients",
+    locations: "/locations",
 } as const;

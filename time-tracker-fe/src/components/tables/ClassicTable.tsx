@@ -13,7 +13,7 @@ export function ClassicTable<T>({ columns, data }: TableProps<T>) {
     });
 
     return (
-        <div className="rounded-xl border border-gray-700 bg-gray-900 text-gray-200">
+        <div className="rounded-xl max-h-[400px] overflow-y-auto  border border-gray-700 bg-gray-900 text-gray-200">
             <table className="w-full text-left">
                 <thead className="bg-gray-800">
                     {table.getHeaderGroups().map((headerGroup) => (

@@ -53,12 +53,14 @@ const CreateEditEmployeeForm: React.FC<CreateEditEmployeeFormProps> = ({ open, o
     const onSubmit = async (data: EmployeeFormValues) => {
         if (isEdit && initialValues) {
             await editEmployee({ id: Number(initialValues.id), dto: { ...data } });
+            alert("Edit success");
         } else {
             await createEmployee({
                 ...data,
                 isActive: true,
                 isAdmin: false,
             });
+            alert("Create success");
         }
         refetch();
         onClose();

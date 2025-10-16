@@ -11,12 +11,6 @@ import Reports from "../../features/dashboard/reports/Reports";
 import type { UserResponseDto } from "../../models/user/UserResponseDto";
 import { useGetUserData, useSetUserData } from "../../redux/user/userSlice";
 
-const tabs = [
-    { value: "punch", label: "Punch Clock", icon: Clock, Component: PunchClock },
-    { value: "admin", label: "Admin Panel", icon: Shield, Component: AdminPannel },
-    { value: "reports", label: "Reports", icon: BarChart3, Component: Reports },
-];
-
 export default function DashboardPage() {
     const { mutateAsync: logout } = useLogout();
     const { data: userData } = useGetUser();
@@ -35,13 +29,19 @@ export default function DashboardPage() {
         }
     };
 
+    const tabs = [
+        { value: "punch", label: "Punch Clock", icon: Clock, Component: PunchClock },
+        { value: "admin", label: "Admin Panel", icon: Shield, Component: AdminPannel },
+        ...((user as unknown as UserResponseDto)?.isAdmin ? [{ value: "reports", label: "Reports", icon: BarChart3, Component: Reports }] : []),
+    ];
+
     useEffect(() => {
         setUserData(userData?.user as UserResponseDto);
     }, [userData, setUserData]);
 
     return (
         <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-800">
-            <div className="flex w-[90%] h-[85vh] backdrop-blur-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+            <div className="flex w-[95%] h-[95vh] backdrop-blur-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
                 <Tabs.Root defaultValue="punch" className="flex w-full">
                     {/* Sidebar */}
                     <aside className="w-64 bg-gradient-to-b from-gray-100 to-gray-200 text-gray-800 flex flex-col justify-between py-6 px-4 border-r border-gray-200">

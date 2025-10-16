@@ -1,7 +1,6 @@
 const PunchClock = () => {
     return (
-        <div className="w-full h-full flex justify-center items-start gap-6 p-6  text-gray-800">
-            {/* Левая карточка */}
+        <div className="w-full h-full flex justify-center items-start gap-6 text-gray-800">
             <div className="flex-1 max-w-xl bg-white shadow-md rounded-2xl p-6 border border-gray-200">
                 <h2 className="text-2xl font-semibold mb-6">Punch In</h2>
 
