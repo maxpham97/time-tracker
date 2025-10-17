@@ -38,6 +38,7 @@ export const login = async (loginData: LoginDto): Promise<LoginResponse> => {
         name: user.name,
         isAdmin: user.isAdmin,
         isActive: user.isActive,
+        punchTimeId: user.punchTimeId || null,
         createdAt: user.createdAt!,
         updatedAt: user.updatedAt!,
     };

@@ -4,6 +4,7 @@ import authRoutes from "./routes/authRoutes";
 import clientRoutes from "./routes/clientRoutes";
 import employeeRoutes from "./routes/employeeRoutes";
 import locationRoutes from "./routes/locationsRoutes";
+import punchTimeRoutes from "./routes/punchTimeRoutes";
 import userRoutes from "./routes/userRoutes";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/api", clientRoutes);
 app.use("/api", locationRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api", punchTimeRoutes);
 
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error("Global error:", err);

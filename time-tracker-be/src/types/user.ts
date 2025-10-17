@@ -7,6 +7,7 @@ export interface User {
     isActive: boolean;
     createdAt?: Date;
     updatedAt?: Date;
+    punchTimeId?: number | null;
 }
 
 export interface UserResponse {
@@ -17,4 +18,5 @@ export interface UserResponse {
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
+    punchTimeId: number | null;
 }

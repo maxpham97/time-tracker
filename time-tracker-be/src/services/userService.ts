@@ -49,7 +49,7 @@ export const getUserById = async (id: number): Promise<UserResponse | null> => {
     const result = await pool
         .request()
         .input("id", sql.Int, id)
-        .query("SELECT id, userName, name, isAdmin, isActive, createdAt, updatedAt FROM Users WHERE id = @id AND isActive = 1");
+        .query("SELECT id, userName, name, isAdmin, isActive, punchTimeId, createdAt, updatedAt FROM Users WHERE id = @id AND isActive = 1");
 
     return result.recordset[0] || null;
 };
